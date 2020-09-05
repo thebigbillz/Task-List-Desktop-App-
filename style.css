@@ -1,0 +1,20 @@
+.container {
+  margin-top: 1.7rem;
+}
+.card-title {
+  font-weight: 400 !important;
+}
+body::-webkit-scrollbar {
+  width: 0.6em;
+  border-radius: 7px;
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 7px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #1a7269;
+  border-radius: 7px;
+}

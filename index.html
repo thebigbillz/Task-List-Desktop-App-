@@ -1,18 +1,94 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
-		<title>Electron boilerplate</title>
-		<link rel="stylesheet" href="index.css">
+		<meta charset="UTF-8" />
+		<!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+		<meta
+			http-equiv="Content-Security-Policy"
+			content="default-src 'self'; script-src 'self'"
+		/>
+		<meta
+			http-equiv="X-Content-Security-Policy"
+			content="default-src 'self'; script-src 'self'"
+		/>
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="assets/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="assets/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="assets/favicon-16x16.png"
+		/>
+		<link rel="manifest" href="assets/site.webmanifest" />
+		<link
+			rel="stylesheet"
+			href="fontawesome-free-5.14.0-web/css/regular.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="fontawesome-free-5.14.0-web/css/fontawesome.min.css"
+		/>
+		<link
+			href="/fontawesome-free-5.14.0-web/css/fontawesome.css"
+			rel="stylesheet"
+		/>
+		<link href="/fontawesome-free-5.14.0-web/css/brands.css" rel="stylesheet" />
+		<link href="/fontawesome-free-5.14.0-web/css/solid.css" rel="stylesheet" />
+		<link rel="stylesheet" href="materialize/css/materialize.min.css" />
+		<link rel="stylesheet" href="index.css" />
+		<link rel="stylesheet" href="style.css" />
+		<title>Task List</title>
+		<style></style>
 	</head>
-	<body>
+	<body style="background-color: #2bbbad">
 		<div class="container">
-			<header>
-				<h1>Electron boilerplate</h1>
-				<p></p>
-			</header>
-			<section class="main"></section>
-			<footer></footer>
+			<div class="row">
+				<div class="col s12">
+					<div id="main" class="card">
+						<div class="card-content">
+							<span class="card-title">Task List</span>
+							<div class="row">
+								<form id="task-form">
+									<div class="input-field col s12">
+										<input type="text" id="task" name="task" required />
+										<label for="task">New Task</label>
+									</div>
+									<input type="submit" value="Add Task" class="btn" />
+								</form>
+							</div>
+						</div>
+						<div class="card-action">
+							<h5 id="task-title">Tasks</h5>
+							<div class="input-field col s12">
+								<input type="text" name="filter" id="filter" />
+								<label for="filter">Filter Tasks</label>
+							</div>
+							<ul class="collection"></ul>
+							<a href="#" class="clear-tasks btn black">Clear Tasks</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+
+		<!-- You can also require other files to run in this process -->
+		<script src="./renderer.js"></script>
+		<script
+			src="jquery-3.5.1.js"
+			integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+			crossorigin="anonymous"
+		></script>
+		<script src="materialize/js/materialize.min.js"></script>
+		<script src="fontawesome-free-5.14.0-web/js/fontawesome.min.js"></script>
+		<script src="app.js"></script>
 	</body>
 </html>
