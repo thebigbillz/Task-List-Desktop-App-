@@ -1,4 +1,14 @@
-ul li::before {
+ul li.completed::before {
+	content: "\2611" !important; /* Add content: \2022 is the CSS Code/unicode for a bullet */
+
+	color: #17a2b8; /* Change the color */
+	font-weight: normal; /* If you want it to be bold */
+	display: inline-block; /* Needed to add space between the bullet and the text */
+	width: 1rem; /* Also needed for space (tweak if needed) */
+	margin-right: 1rem;
+	margin-top: 0;
+}
+ul li.uncompleted::before {
 	content: "\2610" !important; /* Add content: \2022 is the CSS Code/unicode for a bullet */
 
 	color: #17a2b8; /* Change the color */
@@ -10,6 +20,10 @@ ul li::before {
 }
 .collection .collection-item {
 	line-height: 1.5rem !important;
+}
+
+li.completed {
+	background-color: #17a3b818 !important;
 }
 
 span.del::after {

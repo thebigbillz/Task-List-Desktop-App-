@@ -25,41 +25,17 @@ function loadEventListeners() {
 	// Fillter
 	filter.addEventListener("keyup", filterTasks);
 	//Check Task
-	//taskList.addEventListener("click", checkTask);
+	taskList.addEventListener("click", checkTask);
 }
-
-function onload(e) {
-	if (localStorage.getItem("tasks")) {
-		tasks = JSON.parse(localStorage.getItem("tasks"));
-		tasks.forEach(task => {
-			//Create li
-			const li = document.createElement("li");
-			//Add Class
-			li.className = "collection-item";
-			//Add Text
-			li.innerText = task;
-
-			//Create Link
-			const link = document.createElement("a");
-			// Add Class
-			link.className = "delete-item secondary-content";
-			//Add Icon
-			link.innerHTML = '<span class="del"></span>';
-			// Add Link to Li
-			li.appendChild(link);
-			// Append Child to Ul
-			taskList.appendChild(li);
-		});
-	}
-}
-
-function addTask(e) {
+function displayTask(taskValue, isCompleted) {
 	//Create li
 	const li = document.createElement("li");
 	//Add Class
-	li.className = "collection-item";
+	li.className = isCompleted
+		? "collection-item completed"
+		: "collection-item uncompleted";
 	//Add Text
-	li.innerText = taskInput.value;
+	li.innerText = taskValue;
 
 	//Create Link
 	const link = document.createElement("a");
@@ -71,8 +47,20 @@ function addTask(e) {
 	li.appendChild(link);
 	// Append Child to Ul
 	taskList.appendChild(li);
+}
+function onload(e) {
+	if (localStorage.getItem("tasks")) {
+		tasks = JSON.parse(localStorage.getItem("tasks"));
+		tasks.forEach(task => {
+			displayTask(task.taskValue, task.isCompleted);
+		});
+	}
+}
 
-	storeTask(taskInput.value);
+function addTask(e) {
+	displayTask(taskInput.value, false);
+
+	storeTask(taskInput.value, false);
 
 	//Clear Input
 	taskInput.value = "";
@@ -81,14 +69,14 @@ function addTask(e) {
 }
 
 //Store Task
-function storeTask(task) {
+function storeTask(taskValue, isCompleted) {
 	let tasks;
 	if (localStorage.getItem("tasks") === null) {
 		tasks = [];
 	} else {
 		tasks = JSON.parse(localStorage.getItem("tasks"));
 	}
-	tasks.push(task);
+	tasks.push({ taskValue: taskValue, isCompleted: false });
 	localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
@@ -109,11 +97,17 @@ function removeTask(e) {
 
 //Remove Task
 function checkTask(e) {
-	if (e.target.classList.contains("collection-item checked")) {
+	if (e.target.classList.contains("collection-item")) {
 		e.target.className = "collection-item unchecked";
-	}
-	if (e.target.classList.contains("collection-item unchecked")) {
-		e.target.className = "collection-item checked";
+		let tasks = JSON.parse(localStorage.getItem("tasks"));
+		selectedTask = tasks.filter(task => task.taskValue == e.target.innerText);
+		console.log(selectedTask);
+		e.target.className = selectedTask[0].isCompleted
+			? "collection-item uncompleted"
+			: "collection-item completed";
+		selectedTask[0].isCompleted = !selectedTask[0].isCompleted;
+
+		localStorage.setItem("tasks", JSON.stringify(tasks));
 	}
 
 	e.preventDefault();
@@ -121,7 +115,7 @@ function checkTask(e) {
 
 function removeTaskLs(taskItem) {
 	let tasks = JSON.parse(localStorage.getItem("tasks"));
-	tasks = tasks.filter(task => task != taskItem);
+	tasks = tasks.filter(task => task.taskValue != taskItem);
 	console.log(tasks);
 
 	localStorage.setItem("tasks", JSON.stringify(tasks));
