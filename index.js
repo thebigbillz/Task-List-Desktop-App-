@@ -34,9 +34,12 @@ let mainWindow;
 const createMainWindow = async () => {
 	const win = new BrowserWindow({
 		title: app.name,
-		width: 450,
-		height: 550,
-		icon: image
+		width: 400,
+		height: 670,
+		icon: image,
+		minimizable: false,
+		maximizable: false
+		//frame: false
 	});
 
 	win.setBackgroundColor("#2bbbad");

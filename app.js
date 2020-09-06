@@ -95,7 +95,7 @@ function removeTask(e) {
 	e.preventDefault();
 }
 
-//Remove Task
+//Check Task
 function checkTask(e) {
 	if (e.target.classList.contains("collection-item")) {
 		e.target.className = "collection-item unchecked";

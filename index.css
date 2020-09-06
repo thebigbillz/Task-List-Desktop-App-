@@ -23,7 +23,7 @@ ul li.uncompleted::before {
 }
 
 li.completed {
-	background-color: #17a3b818 !important;
+	background-color: #17a3b81a !important;
 }
 
 span.del::after {
@@ -35,4 +35,11 @@ span.del::after {
 
 span.del:hover::after {
 	color: red;
+}
+.main {
+	height: 100%;
+}
+
+.card .card-action:last-child {
+	min-height: 340px;
 }
